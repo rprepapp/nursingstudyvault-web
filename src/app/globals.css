@@ -1,26 +1,84 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #1B1D28;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.page-content h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.page-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-content p {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.page-content ul, .page-content ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.page-content li {
+  margin-bottom: 0.25rem;
+}
+
+.page-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.page-content th, .page-content td {
+  border: 1px solid #e5e5ea;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.page-content th {
+  background: #e6fafb;
+  color: #0B1F3A;
+  font-weight: 600;
+}
+
+.page-content h1, .page-content h2, .page-content h3 {
+  color: #0B1F3A;
+}
+
+.page-content a {
+  color: #0891a1;
+  font-weight: 600;
+}
+
+.page-content blockquote {
+  border-left: 4px solid #00C2D1;
+  background: #e6fafb;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin-bottom: 0.75rem;
 }
