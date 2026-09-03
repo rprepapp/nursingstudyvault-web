@@ -1,11 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/app/lib/firebase";
 import Breadcrumb from "@/app/components/Breadcrumb";
 
-export default function SearchPage() {
+function SearchResults() {
   const searchParams = useSearchParams();
   const q = searchParams.get("q") || "";
   const [results, setResults] = useState([]);
@@ -37,7 +37,6 @@ export default function SearchPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Compact navy header */}
       <div className="bg-[#0B1F3A] relative overflow-hidden">
         <div className="absolute top-0 right-0 w-72 h-72 bg-[#00C2D1]/10 rounded-full blur-3xl"></div>
         <div className="max-w-4xl mx-auto px-6 pt-8 pb-12 relative">
@@ -107,5 +106,13 @@ export default function SearchPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50" />}>
+      <SearchResults />
+    </Suspense>
   );
 }
