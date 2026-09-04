@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
+import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/app/lib/firebase";
 
 export default function Newsletter() {
@@ -20,20 +20,19 @@ export default function Newsletter() {
     }
 
     try {
+      const subscriberId = email.trim().toLowerCase();
+      const subscriberRef = doc(db, "subscribers", subscriberId);
+
       // Check if email already exists
-      const q = query(
-        collection(db, "subscribers"),
-        where("email", "==", email.trim())
-      );
-      const snap = await getDocs(q);
-      if (!snap.empty) {
+      const existingDoc = await getDoc(subscriberRef);
+      if (existingDoc.exists()) {
         setStatus("error");
         setMessage("This email is already subscribed.");
         return;
       }
 
       // Save to Firestore
-      await addDoc(collection(db, "subscribers"), {
+      await setDoc(subscriberRef, {
         email: email.trim(),
         subscribedAt: serverTimestamp(),
         status: "active",
