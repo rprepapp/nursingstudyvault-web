@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth, db } from "@/app/lib/firebase";
+import { db } from "@/app/lib/firebase";
+import { auth } from "@/app/lib/firebase-auth";
 import {
   collection, addDoc, updateDoc, deleteDoc, doc,
   serverTimestamp, query, orderBy, onSnapshot, getDocs, where,

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/app/lib/firebase";
+import { auth } from "@/app/lib/firebase-auth";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");

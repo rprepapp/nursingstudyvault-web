@@ -140,21 +140,21 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-[#0B1F3A]/[0.03] border-2 border-[#0B1F3A]/10 rounded-2xl p-6">
               <div className="w-12 h-12 bg-[#0B1F3A] rounded-xl flex items-center justify-center text-2xl mb-4">📚</div>
-              <h3 className="font-extrabold text-[#0B1F3A] mb-2">Comprehensive Content</h3>
+              <h2 className="font-extrabold text-[#0B1F3A] mb-2">Comprehensive Content</h2>
               <p className="text-gray-600 text-sm leading-relaxed">
                 Detailed care plans, case studies, and assignments following NANDA guidelines and nursing curriculum.
               </p>
             </div>
             <div className="bg-[#00C2D1]/10 border-2 border-[#00C2D1]/30 rounded-2xl p-6">
               <div className="w-12 h-12 bg-[#00C2D1] rounded-xl flex items-center justify-center text-2xl mb-4">⚡</div>
-              <h3 className="font-extrabold text-[#0B1F3A] mb-2">Ready to Download</h3>
+              <h2 className="font-extrabold text-[#0B1F3A] mb-2">Ready to Download</h2>
               <p className="text-gray-600 text-sm leading-relaxed">
                 All files are in PDF format, properly formatted, and instantly downloadable. No signup required.
               </p>
             </div>
             <div className="bg-[#0B1F3A]/[0.03] border-2 border-[#0B1F3A]/10 rounded-2xl p-6">
               <div className="w-12 h-12 bg-[#0B1F3A] rounded-xl flex items-center justify-center text-2xl mb-4">🎯</div>
-              <h3 className="font-extrabold text-[#0B1F3A] mb-2">Regularly Updated</h3>
+              <h2 className="font-extrabold text-[#0B1F3A] mb-2">Regularly Updated</h2>
               <p className="text-gray-600 text-sm leading-relaxed">
                 New files added weekly based on student requests and latest curriculum changes.
               </p>

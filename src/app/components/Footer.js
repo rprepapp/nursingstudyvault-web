@@ -79,7 +79,7 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <span className="w-9 h-9 bg-[#00C2D1]/15 rounded-lg flex items-center justify-center text-base">📧</span>
                 <div>
-                  <div className="text-xs text-gray-500 uppercase font-semibold">Support</div>
+                  <div className="text-xs text-gray-400 uppercase font-semibold">Support</div>
                   <a
                     href="mailto:support@nursingstudyvault.online"
                     className="text-gray-300 hover:text-[#00C2D1] transition-colors text-sm font-medium"
@@ -91,7 +91,7 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <span className="w-9 h-9 bg-[#00C2D1]/15 rounded-lg flex items-center justify-center text-base">💬</span>
                 <div>
-                  <div className="text-xs text-gray-500 uppercase font-semibold">Help Desk</div>
+                  <div className="text-xs text-gray-400 uppercase font-semibold">Help Desk</div>
                   <a
                     href="mailto:help@nursingstudyvault.online"
                     className="text-gray-300 hover:text-[#00C2D1] transition-colors text-sm font-medium"
@@ -193,7 +193,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
           <div className="text-center md:text-left">
             <span className="font-semibold text-gray-400">© 2026 NursingStudyVault.online</span> — All rights reserved.
           </div>
