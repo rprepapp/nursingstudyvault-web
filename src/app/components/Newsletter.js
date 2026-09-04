@@ -40,6 +40,23 @@ export default function Newsletter() {
         source: "footer_newsletter",
       });
 
+      // 📬 Add to Hostinger Reach
+      try {
+        const reachResponse = await fetch("/api/subscribe-to-reach", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email.trim() }),
+        });
+        if (!reachResponse.ok) {
+          console.error("Reach sync failed:", await reachResponse.json());
+        } else {
+          console.log("✅ Added to Hostinger Reach");
+        }
+      } catch (reachErr) {
+        console.error("Reach sync error:", reachErr);
+        // Don't fail the subscription if Reach sync fails
+      }
+
       // 🔥 Send welcome email
       try {
         const response = await fetch("/api/send-email", {
