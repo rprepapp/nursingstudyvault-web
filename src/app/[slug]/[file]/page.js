@@ -8,11 +8,11 @@ import PrintButton from "@/app/components/PrintButton";
 
 export const dynamic = "force-dynamic";
 
-function toDirectDriveLink(url) {
+function toEmbedDriveLink(url) {
   if (!url) return url;
   const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
   const id = match ? match[1] : null;
-  return id ? `https://drive.google.com/uc?export=download&id=${id}` : url;
+  return id ? `https://drive.google.com/file/d/${id}/preview` : url;
 }
 
 function estimateReadTime(html) {
@@ -133,7 +133,7 @@ export default async function FilePage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
-      {/* Navy title block — full width */}
+      {/* Navy title block */}
       <div className="bg-[#0B1F3A] relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#00C2D1]/15 rounded-full blur-3xl"></div>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-10 relative">
@@ -208,6 +208,25 @@ export default async function FilePage({ params }) {
               dangerouslySetInnerHTML={{ __html: fileData.pageContent || "" }}
             />
 
+            {/* ===== PDF VIEWER (view only, no download) ===== */}
+            <div className="mt-10">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-8 h-8 rounded-lg bg-[#0B1F3A] flex items-center justify-center text-sm">📄</span>
+                <h2 className="font-extrabold text-lg text-[#0B1F3A]">View Full Document</h2>
+              </div>
+              <div className="text-sm text-gray-500 mb-4">
+                Use the zoom and page controls inside the viewer below to read the complete file. This document is for on-site viewing only.
+              </div>
+              <div className="rounded-2xl overflow-hidden border-2 border-[#0B1F3A]/10 bg-gray-100" style={{ aspectRatio: "3 / 4" }}>
+                <iframe
+                  src={toEmbedDriveLink(fileData.driveLink)}
+                  className="w-full h-full"
+                  allow="autoplay"
+                  title={fileData.title}
+                />
+              </div>
+            </div>
+
             {/* Tags */}
             {fileData.tags && fileData.tags.length > 0 && (
               <div className="mt-8 pt-6 border-t border-gray-100">
@@ -234,56 +253,32 @@ export default async function FilePage({ params }) {
             </div>
           </div>
 
-          {/* ===== SIDEBAR — full theme colors ===== */}
+          {/* ===== SIDEBAR ===== */}
           <aside className="lg:sticky lg:top-6 lg:self-start flex flex-col gap-5">
 
-            {/* Download box — navy + cyan */}
+            {/* View info box (replaces download box) */}
             <div className="rounded-2xl bg-[#0B1F3A] overflow-hidden relative">
               <div className="absolute -top-8 -right-8 w-32 h-32 bg-[#00C2D1]/20 rounded-full blur-2xl"></div>
               <div className="p-5 relative">
-                <div className="font-extrabold text-white text-sm flex items-center gap-2 mb-4">📥 Download File</div>
-                <ol className="flex flex-col gap-2.5 text-xs text-gray-300 mb-5">
-                  <li className="flex items-start gap-2">
-                    <span className="flex-shrink-0 w-5 h-5 bg-[#00C2D1] text-[#0B1F3A] rounded-full flex items-center justify-center font-bold text-[10px] mt-0.5">1</span>
-                    <span>Tap <strong className="text-white">Download PDF</strong> below.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="flex-shrink-0 w-5 h-5 bg-[#00C2D1] text-[#0B1F3A] rounded-full flex items-center justify-center font-bold text-[10px] mt-0.5">2</span>
-                    <span>Opens on Google Drive — tap the download icon (↓).</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="flex-shrink-0 w-5 h-5 bg-[#00C2D1] text-[#0B1F3A] rounded-full flex items-center justify-center font-bold text-[10px] mt-0.5">3</span>
-                    <span>Choose <strong className="text-white">Download</strong> — saves to your Files app.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="flex-shrink-0 w-5 h-5 bg-[#00C2D1] text-[#0B1F3A] rounded-full flex items-center justify-center font-bold text-[10px] mt-0.5">4</span>
-                    <span>Access anytime, even offline.</span>
-                  </li>
-                </ol>
-                <a
-                  href={toDirectDriveLink(fileData.driveLink)}
-                  rel="noopener noreferrer"
-                  className="block text-center w-full px-4 py-3 rounded-lg font-bold text-sm text-[#0B1F3A] bg-[#00C2D1] hover:bg-[#33d1de] transition-colors"
-                >
-                  📥 Download PDF
-                </a>
+                <div className="font-extrabold text-white text-sm flex items-center gap-2 mb-3">👁️ View Only</div>
+                <p className="text-xs text-gray-300 leading-relaxed">
+                  This file can be viewed directly on the page — pinch or use the on-screen controls to zoom and navigate between pages.
+                  Downloading is disabled to keep the vault's content protected.
+                </p>
               </div>
             </div>
 
-            {/* File info box — cyan bordered */}
+            {/* File info box */}
             <div className="rounded-2xl border-2 border-[#00C2D1]/30 bg-white p-5">
               <div className="text-xs font-bold uppercase tracking-wide text-[#0891a1] mb-3">File Info</div>
               <div className="flex flex-col gap-2.5 text-sm">
                 <div className="flex justify-between"><span className="text-gray-500">Category</span><span className="font-bold text-[#0B1F3A]">{category.name}</span></div>
-                <div className="flex justify-between"><span className="text-gray-500">Format</span><span className="font-bold text-[#0B1F3A]">PDF</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Format</span><span className="font-bold text-[#0B1F3A]">PDF (View Only)</span></div>
                 <div className="flex justify-between"><span className="text-gray-500">Access</span><span className="font-bold text-[#0B1F3A]">Free</span></div>
-                {fileData.downloads && (
-                  <div className="flex justify-between"><span className="text-gray-500">Downloads</span><span className="font-bold text-[#0B1F3A]">{fileData.downloads}</span></div>
-                )}
               </div>
             </div>
 
-            {/* Request box — cyan tint */}
+            {/* Request box */}
             <div className="rounded-2xl bg-[#00C2D1]/10 border-2 border-[#00C2D1]/30 p-5 text-center">
               <div className="text-sm text-[#0B1F3A] font-semibold mb-3">Need something specific?</div>
               <a href="/request" className="inline-block text-sm font-bold text-[#0891a1] hover:underline">
@@ -291,7 +286,7 @@ export default async function FilePage({ params }) {
               </a>
             </div>
 
-            {/* Related files — inside sidebar, navy header */}
+            {/* Related files */}
             {relatedFiles.length > 0 && (
               <div className="rounded-2xl border-2 border-gray-100 overflow-hidden">
                 <div className="bg-[#0B1F3A] px-5 py-3">
