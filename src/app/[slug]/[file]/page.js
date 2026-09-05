@@ -5,6 +5,7 @@ import { db } from "@/app/lib/firebase";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import ShareButtons from "@/app/components/ShareButtons";
 import PrintButton from "@/app/components/PrintButton";
+import CookieNotice from "@/app/components/CookieNotice";
 
 export const dynamic = "force-dynamic";
 
@@ -128,6 +129,7 @@ export default async function FilePage({ params }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <CookieNotice />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
